@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BookReader</string>
+    <string name="log_into_your_account">Увійдіть у свій обліковий запис або зареєструйтеся</string>
+    <string name="sign_in">Увійти</string>
+    <string name="register">Зареєструватися</string>
+    <string name="email">Пошта</string>
+    <string name="password">Пароль</string>
+    <string name="name">Ім\'я</string>
+    <string name="phone">Номер телефону</string>
+</resources>
