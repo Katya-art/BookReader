@@ -44,6 +44,36 @@
             app:met_errorColor="#ddaa00"
             app:met_singleLineEllipsis="true"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:weightSum="2"
+            android:layout_below="@+id/text_button"
+            android:layout_margin="15dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnCancel1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="6dp"
+                android:textColor="@color/white"
+                android:background="@drawable/button_animation"
+                android:text="@string/cancel" />
+
+            <Button
+                android:id="@+id/btnSignIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="6dp"
+                android:textColor="@color/white"
+                android:background="@drawable/button_animation"
+                android:text="@string/sign_in" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

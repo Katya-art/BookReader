@@ -1,10 +1,15 @@
 <resources>
-    <string name="app_name">BookReader</string>
+    <string name="app_title">BookReader</string>
     <string name="log_into_your_account">Увійдіть у свій обліковий запис або зареєструйтеся</string>
     <string name="sign_in">Увійти</string>
     <string name="register">Зареєструватися</string>
+    <string name="cancel">Відмінити</string>
     <string name="email">Пошта</string>
     <string name="password">Пароль</string>
     <string name="name">Ім\'я</string>
     <string name="phone">Номер телефону</string>
+
+    <string name="app_name">Read from Asset</string>
+    <!-- This is just a unique id. Typically based on pkg name -->
+    <string name="file_provider_authority" translatable="false">com.mirislam.readasset.fileprovider</string>
 </resources>
