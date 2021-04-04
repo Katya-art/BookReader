@@ -1,62 +1,62 @@
 package ua.kpi.comsys.bookreader;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Environment;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
-public class MainWindowActivity extends AppCompatActivity implements View.OnClickListener {
+import java.io.File;
+import java.util.ArrayList;
 
-    private static final int EXT_STORAGE_PERMISSION_CODE = 0 ;
-    private static final String TAG = "";
-    Button btnJava_Programming_pdf;
+import ua.kpi.comsys.bookreader.models.Book;
+
+public class MainWindowActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+    private ArrayList<Book> books;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_window);
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ListView listView = findViewById(R.id.list);
+        books = new ArrayList<>();
+        Search_Dir(Environment.getExternalStorageDirectory());
+        BookArrayAdapter bookArrayAdapter = new BookArrayAdapter(MainWindowActivity.this, R.layout.book_info, books);
+        listView.setAdapter(bookArrayAdapter);
+        listView.setOnItemClickListener(this);
+    }
 
-        if (ContextCompat.checkSelfPermission(
-                MainWindowActivity.this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(
-                    MainWindowActivity.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    EXT_STORAGE_PERMISSION_CODE);
-            Log.d(TAG, "After getting permission: "+ Manifest.permission.WRITE_EXTERNAL_STORAGE +
-                    " " + ContextCompat.checkSelfPermission(
-                    MainWindowActivity.this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE));
+    public void Search_Dir(File dir) {
+        File FileList[] = dir.listFiles();
 
-        } else {
-            // We were granted permission already before
-            Log.d(TAG, "Already has permission to write to external storage");
+        if (FileList != null) {
+            for (int i = 0; i < FileList.length; i++) {
+                if (FileList[i].isDirectory()) {
+                    Search_Dir(FileList[i]);
+                } else {
+                    if (FileList[i].getName().endsWith(".pdf")){
+                        Book book = new Book();
+                        book.setName(FileList[i].getName());
+                        book.setPath(FileList[i].getAbsolutePath());
+                        System.out.println(FileList[i].getAbsolutePath());
+                        books.add(book);
+                    }
+                }
+            }
         }
-
-        btnJava_Programming_pdf = (Button) findViewById(R.id.btnJava_Programming_pdf);
-        btnJava_Programming_pdf.setOnClickListener(this);
-
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btnJava_Programming_pdf:
-                // TODO Call second activity
-                Intent intent1 = new Intent(this, BookPDF.class);
-                startActivity(intent1);
-                break;
-
-            default:
-                break;
-        }
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Book book = (Book) parent.getItemAtPosition(position);
+        Intent intent = new Intent(this, BookPDF.class);
+        intent.putExtra("name", book.getName());
+        intent.putExtra("path", book.getPath());
+        startActivity(intent);
     }
 }

@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main_window"
+    xmlns:tools="http://schemas.android.com/apk/tools"
+    android:id="@+id/fragment_movies"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainWindowActivity">
+    android:paddingBottom="10dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="1dp"
+    tools:context="ua.kpi.comsys.bookreader.MainWindowActivity"
+    android:paddingEnd="5dp"
+    android:paddingStart="5dp">
 
-    <ScrollView
+    <ListView
+        android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/btnJava_Programming_pdf"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Java.Programming.pdf"
-                android:textSize="14sp"/>
-
-        </LinearLayout>
-
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="45dp"/>
 </RelativeLayout>
