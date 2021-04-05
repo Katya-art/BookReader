@@ -13,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BookReader">
-        <activity android:name=".BookPDF"></activity>
-        <activity android:name=".MainWindowActivity" />
+        <activity android:name=".BookPDF" />
+        <activity android:name=".BookTXT" />
+        <activity android:name=".MainWindow" />
         <activity android:name=".RegisterWindow" />
         <activity android:name=".SignInWindow" />
         <activity android:name=".MainActivity">

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 import ua.kpi.comsys.bookreader.models.Book;
 
-public class MainWindowActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainWindow extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ArrayList<Book> books;
 
@@ -26,7 +26,7 @@ public class MainWindowActivity extends AppCompatActivity implements AdapterView
         ListView listView = findViewById(R.id.list);
         books = new ArrayList<>();
         Search_Dir(Environment.getExternalStorageDirectory());
-        BookArrayAdapter bookArrayAdapter = new BookArrayAdapter(MainWindowActivity.this, R.layout.book_info, books);
+        BookArrayAdapter bookArrayAdapter = new BookArrayAdapter(MainWindow.this, R.layout.book_info, books);
         listView.setAdapter(bookArrayAdapter);
         listView.setOnItemClickListener(this);
     }
@@ -39,7 +39,8 @@ public class MainWindowActivity extends AppCompatActivity implements AdapterView
                 if (FileList[i].isDirectory()) {
                     Search_Dir(FileList[i]);
                 } else {
-                    if (FileList[i].getName().endsWith(".pdf")){
+                    if (FileList[i].getName().endsWith(".pdf") ||
+                            FileList[i].getName().endsWith(".txt")){
                         Book book = new Book();
                         book.setName(FileList[i].getName());
                         book.setPath(FileList[i].getAbsolutePath());
@@ -54,7 +55,13 @@ public class MainWindowActivity extends AppCompatActivity implements AdapterView
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Book book = (Book) parent.getItemAtPosition(position);
-        Intent intent = new Intent(this, BookPDF.class);
+        Intent intent = null;
+        if (book.getName().endsWith(".pdf")) {
+            intent = new Intent(this, BookPDF.class);
+        } else if (book.getName().endsWith(".txt")) {
+            intent = new Intent(this, BookTXT.class);
+        }
+        assert intent != null;
         intent.putExtra("name", book.getName());
         intent.putExtra("path", book.getPath());
         startActivity(intent);
