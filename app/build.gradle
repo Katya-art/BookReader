@@ -49,6 +49,9 @@ dependencies {
     implementation 'com.rengwuxian.materialedittext:library:2.1.4'
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    compile files('src/main/libs/fb2parser.jar')
+    compile files('src/main/libs/epublib-core-latest.jar')
+    compile files('src/main/libs/slf4j-android-1.6.1-RC1.jar')
 }
 
 apply plugin: 'com.google.gms.google-services'

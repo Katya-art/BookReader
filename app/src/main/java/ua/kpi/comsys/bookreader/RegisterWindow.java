@@ -46,46 +46,50 @@ public class RegisterWindow extends AppCompatActivity {
         btnCancel.setOnClickListener(v -> finish());
 
         btnRegister.setOnClickListener(v -> {
+            boolean isCorrect = true;
             if (TextUtils.isEmpty(Objects.requireNonNull(email.getText()).toString())) {
                 email.setError("Введіть пошту");
-                return;
-            }
-
-            if (!email.getText().toString().trim().matches(emailPattern)) {
-                email.setError("Не вірна поштова адреса");
-                return;
+                isCorrect = false;
+            } else {
+                if (!email.getText().toString().trim().matches(emailPattern)) {
+                    email.setError("Не вірна поштова адреса");
+                    isCorrect = false;
+                }
             }
 
             if (TextUtils.isEmpty(Objects.requireNonNull(password.getText()).toString())) {
                 password.setError("Введіть пароль");
-                return;
-            }
-
-            if (password.getText().toString().length() < 6 ||
-                    password.getText().toString().length() > 20) {
-                password.setError("Пароль має містити від 6 до 20 символів");
-                return;
+                isCorrect = false;
+            } else {
+                if (password.getText().toString().length() < 6 ||
+                        password.getText().toString().length() > 20) {
+                    password.setError("Пароль має містити від 6 до 20 символів");
+                    isCorrect = false;
+                }
             }
 
             if (TextUtils.isEmpty(Objects.requireNonNull(name.getText()).toString())) {
                 name.setError("Введіть ім'я користувача");
-                return;
-            }
-
-            if (name.getText().toString().length() < 3 ||
-                    name.getText().toString().length() > 30) {
-                name.setError("Ім'я користувача має містити від 3 до 30 символів");
-                return;
+                isCorrect = false;
+            } else {
+                if (name.getText().toString().length() < 3 ||
+                        name.getText().toString().length() > 30) {
+                    name.setError("Ім'я користувача має містити від 3 до 30 символів");
+                    isCorrect = false;
+                }
             }
 
             if (TextUtils.isEmpty(Objects.requireNonNull(phone.getText()).toString())) {
-                //Snackbar.make(root, "Введіть номер телефону", Snackbar.LENGTH_SHORT).show();
                 phone.setError("Введіть номер телефону");
-                return;
+                isCorrect = false;
+            } else {
+                if (!phone.getText().toString().trim().matches(phonePattern)) {
+                    phone.setError("Введіть номер телефону у форматі +38XXXXXXXXXX");
+                    isCorrect = false;
+                }
             }
 
-            if (!phone.getText().toString().trim().matches(phonePattern)) {
-                phone.setError("Введіть номер телефону у форматі +38XXXXXXXXXX");
+            if (!isCorrect) {
                 return;
             }
 

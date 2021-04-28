@@ -32,19 +32,21 @@ public class MainWindow extends AppCompatActivity implements AdapterView.OnItemC
     }
 
     public void Search_Dir(File dir) {
-        File FileList[] = dir.listFiles();
+        File[] FileList = dir.listFiles();
 
         if (FileList != null) {
-            for (int i = 0; i < FileList.length; i++) {
-                if (FileList[i].isDirectory()) {
-                    Search_Dir(FileList[i]);
+            for (File file : FileList) {
+                if (file.isDirectory()) {
+                    Search_Dir(file);
                 } else {
-                    if (FileList[i].getName().endsWith(".pdf") ||
-                            FileList[i].getName().endsWith(".txt")){
+                    if (file.getName().endsWith(".pdf") ||
+                            file.getName().endsWith(".txt") ||
+                            file.getName().endsWith(".fb2") ||
+                            file.getName().endsWith(".epub")){
                         Book book = new Book();
-                        book.setName(FileList[i].getName());
-                        book.setPath(FileList[i].getAbsolutePath());
-                        System.out.println(FileList[i].getAbsolutePath());
+                        book.setName(file.getName());
+                        book.setPath(file.getAbsolutePath());
+                        System.out.println(file.getAbsolutePath());
                         books.add(book);
                     }
                 }
@@ -60,6 +62,10 @@ public class MainWindow extends AppCompatActivity implements AdapterView.OnItemC
             intent = new Intent(this, BookPDF.class);
         } else if (book.getName().endsWith(".txt")) {
             intent = new Intent(this, BookTXT.class);
+        } else if (book.getName().endsWith(".fb2")) {
+            intent = new Intent(this, BookFB2.class);
+        } else if (book.getName().endsWith(".epub")) {
+            intent = new Intent(this, BookEPUB.class);
         }
         assert intent != null;
         intent.putExtra("name", book.getName());
