@@ -8,8 +8,11 @@
     <string name="password">Пароль</string>
     <string name="name">Ім\'я</string>
     <string name="phone">Номер телефону</string>
+    <string name="sort">Назва(А-Я)</string>
+    <string name="sort_reversed">Назва(Я-А)</string>
 
     <string name="app_name">Read from Asset</string>
     <!-- This is just a unique id. Typically based on pkg name -->
     <string name="file_provider_authority" translatable="false">com.mirislam.readasset.fileprovider</string>
+
 </resources>
