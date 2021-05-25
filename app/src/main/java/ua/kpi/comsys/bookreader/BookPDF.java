@@ -26,6 +26,7 @@ public class BookPDF extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        MainWindow.closeLoadingDialog();
         onBackPressed();
         //this.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         return super.onOptionsItemSelected(item);

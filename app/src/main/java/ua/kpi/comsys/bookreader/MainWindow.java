@@ -26,12 +26,14 @@ public class MainWindow extends AppCompatActivity implements AdapterView.OnItemC
 
     private BookArrayAdapter bookArrayAdapter;
     private ArrayList<Book> books;
+    public static LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_window);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        loadingDialog = new LoadingDialog(MainWindow.this);
         ListView listView = findViewById(R.id.list);
         books = new ArrayList<>();
         Search_Dir(Environment.getExternalStorageDirectory());
@@ -65,6 +67,7 @@ public class MainWindow extends AppCompatActivity implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        loadingDialog.startLoadingDialog();
         Book book = (Book) parent.getItemAtPosition(position);
         Intent intent = null;
         if (book.getName().endsWith(".pdf")) {
@@ -146,5 +149,9 @@ public class MainWindow extends AppCompatActivity implements AdapterView.OnItemC
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void closeLoadingDialog() {
+        loadingDialog.dismissDialog();
     }
 }

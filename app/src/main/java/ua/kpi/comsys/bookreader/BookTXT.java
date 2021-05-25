@@ -1,6 +1,9 @@
 package ua.kpi.comsys.bookreader;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -15,20 +18,27 @@ import java.io.InputStream;
 public class BookTXT extends AppCompatActivity {
 
     TextView textView;
+    String text;
+    LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.activity_book_txt);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        View llProgressBar = findViewById(R.id.llProgressBar);
+        loadingDialog = new LoadingDialog(BookTXT.this);
+        loadingDialog.startLoadingDialog();
         textView = findViewById(R.id.tvText);
         Bundle arguments = getIntent().getExtras();
         String path = arguments.get("path").toString();
-        llProgressBar.setVisibility(View.VISIBLE);
-        String text = openFile(path);
-        llProgressBar.setVisibility(View.GONE);
+        text = openFile(path);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         textView.setText(text);
+        loadingDialog.dismissDialog();
     }
 
     private String openFile(String path) {
@@ -52,6 +62,7 @@ public class BookTXT extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        MainWindow.closeLoadingDialog();
         onBackPressed();
         //this.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         return super.onOptionsItemSelected(item);

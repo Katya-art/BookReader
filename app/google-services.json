@@ -1,24 +1,25 @@
 {
   "project_info": {
     "project_number": "290106313206",
+    "firebase_url": "https://bookreader-efc80-default-rtdb.firebaseio.com",
     "project_id": "bookreader-efc80",
     "storage_bucket": "bookreader-efc80.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:290106313206:android:76d8667ce277f26180dfd7",
+        "mobilesdk_app_id": "1:290106313206:android:8649eb5126eaac6780dfd7",
         "android_client_info": {
           "package_name": "ua.kpi.comsys.bookreader"
         }
       },
       "oauth_client": [
         {
-          "client_id": "290106313206-ajqmql6r7lk1foqicqkaagea3smv0ion.apps.googleusercontent.com",
+          "client_id": "290106313206-5sv4onp3874rpq7d6amoiheemc9jf2v9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "ua.kpi.comsys.bookreader",
-            "certificate_hash": "d87be7b84354c99b2a31b0a403d95b925c2677f1"
+            "certificate_hash": "06a3cc9760658156b31024cd769c382a2cbe7a1d"
           }
         },
         {

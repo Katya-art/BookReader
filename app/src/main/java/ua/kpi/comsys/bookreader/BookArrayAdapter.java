@@ -54,7 +54,7 @@ public class BookArrayAdapter extends ArrayAdapter implements Filterable {
     public View getView(int position, View contentView, ViewGroup parent) {
         View view = LayoutInflater.from(context).inflate(resource, parent, false);
 
-        TextView bookName = (TextView) view.findViewById(R.id.textView);
+        TextView bookName = view.findViewById(R.id.textView);
         bookName.setText(booksFiltered.get(position).getName());
         return view;
     }

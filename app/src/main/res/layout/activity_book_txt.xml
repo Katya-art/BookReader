@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".BookTXT">
 
-    <include
-        android:id="@+id/llProgressBar"
-        android:visibility="gone"
-        layout="@layout/progress_bar"/>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
