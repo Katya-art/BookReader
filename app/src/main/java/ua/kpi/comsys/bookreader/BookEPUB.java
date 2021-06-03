@@ -1,44 +1,41 @@
 package ua.kpi.comsys.bookreader;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.webkit.WebView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import nl.siegmann.epublib.domain.Book;
 import nl.siegmann.epublib.domain.Resource;
-import nl.siegmann.epublib.domain.TOCReference;
 import nl.siegmann.epublib.epub.EpubReader;
 
 public class BookEPUB extends AppCompatActivity {
-    WebView webView;
+    TextView textView;
     LoadingDialog loadingDialog;
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_epub);
-        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        webView = findViewById(R.id.bookEpub);
-        webView.setOverScrollMode(1);
-
+        Objects.requireNonNull(this.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        textView = findViewById(R.id.bookEpub);
+        textView.setOverScrollMode(1);
         Bundle arguments = getIntent().getExtras();
         String path = arguments.get("path").toString();
         new LoadBook().execute(path);
@@ -108,9 +105,11 @@ public class BookEPUB extends AppCompatActivity {
         @Override
         protected void onPostExecute(String... s) {
             super.onPostExecute(s);
-            webView.loadDataWithBaseURL(s[0], s[1], "text/html", "UTF-8", null);
-            webView.setVerticalScrollBarEnabled(true);
-            webView.setVerticalScrollBarEnabled(true);
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                textView.setText(Html.fromHtml(s[1],Html.FROM_HTML_MODE_LEGACY));
+            } else {
+                textView.setText(Html.fromHtml(s[1]));
+            }
             loadingDialog.dismissDialog();
         }
     }

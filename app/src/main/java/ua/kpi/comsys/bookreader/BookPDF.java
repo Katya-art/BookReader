@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import com.github.barteksc.pdfviewer.PDFView;
 
 import java.io.File;
+import java.util.Objects;
 
 public class BookPDF extends AppCompatActivity {
 
@@ -21,7 +22,7 @@ public class BookPDF extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_pdf);
-        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(this.getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         bookPDFView = findViewById(R.id.pdfView);
         Bundle arguments = getIntent().getExtras();
         String path = arguments.get("path").toString();
