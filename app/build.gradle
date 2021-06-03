@@ -53,6 +53,7 @@ dependencies {
     compile files('src/main/libs/fb2parser.jar')
     compile files('src/main/libs/epublib-core-latest.jar')
     compile files('src/main/libs/slf4j-android-1.6.1-RC1.jar')
+    compile files('src/main/libs/PdfViewer.jar')
 }
 
 apply plugin: 'com.android.application'

@@ -1,8 +1,12 @@
 package ua.kpi.comsys.bookreader;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -36,10 +40,32 @@ public class BookFB2 extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        MainWindow.closeLoadingDialog();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Initialize menu inflater
+        MenuInflater menuInflater = getMenuInflater();
+        //Inflate menu
+        menuInflater.inflate(R.menu.night_mode_menu, menu);
+        MenuItem changeModeItem = menu.findItem(R.id.night_mode);
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            changeModeItem.setIcon(R.drawable.light_mode_white_24dp);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.night_mode) {
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                return true;
+            }
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            return true;
+        }
+        //MainWindow.closeLoadingDialog();
         onBackPressed();
-        //this.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         return super.onOptionsItemSelected(item);
     }
 

@@ -1,11 +1,16 @@
 package ua.kpi.comsys.bookreader;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.RelativeLayout;
@@ -23,105 +28,90 @@ import nl.siegmann.epublib.domain.TOCReference;
 import nl.siegmann.epublib.epub.EpubReader;
 
 public class BookEPUB extends AppCompatActivity {
-
-    TextView textView;
     WebView webView;
+    LoadingDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_epub);
         this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        webView = (WebView) findViewById(R.id.bookEpub);
+        webView = findViewById(R.id.bookEpub);
         webView.setOverScrollMode(1);
 
         Bundle arguments = getIntent().getExtras();
         String path = arguments.get("path").toString();
-        try {
-            // find InputStream for book
-            InputStream epubInputStream = new FileInputStream(path);
-
-            // Load Book from inputStream
-            Book book = (new EpubReader()).readEpub(epubInputStream);
-            StringBuilder data = new StringBuilder();
-            List<Resource> bookChapters = book.getContents();
-            for (int i = 1; i < bookChapters.size(); i++) {
-                data.append(new String(bookChapters.get(i).getData()));
-            }
-            /*String data0 = new String(book.getContents().get(0).getData());
-            String data1 = new String(book.getContents().get(1).getData());
-            String data2 = new String(book.getContents().get(2).getData());
-            String data3 = new String(book.getContents().get(3).getData());
-            String data4 = new String(book.getContents().get(4).getData());
-            String data = data0 + data1 + data2 + data3 + data4;*/
-            webView.loadDataWithBaseURL(path, new String(data), "text/html", "UTF-8", null);
-            webView.setVerticalScrollBarEnabled(true);
-            webView.setVerticalScrollBarEnabled(true);
-
-
-        } catch (IOException e) {
-            Log.e("epublib", e.getMessage());
-        }
-
-        /*textView = findViewById(R.id.tvBookEpub);
-        Bundle arguments = getIntent().getExtras();
-        String path = arguments.get("path").toString();
-        try {
-            // find InputStream for book
-            InputStream epubInputStream = new FileInputStream(path);
-
-            // Load Book from inputStream
-            Book book = (new EpubReader()).readEpub(epubInputStream);
-
-            StringBuilder text = new StringBuilder();
-            text.append("Annotation\n").append(book.getMetadata().getDescriptions().toString()
-                    .replace("[", "").replace("]", ""))
-                    .append("\n").append("\n");
-
-            List<TOCReference> tocReferences = book.getTableOfContents().getTocReferences();
-            for (int i = 0; i < tocReferences.size(); i++) {
-                text.append(tocReferences.get(i).getTitle()).append("\n");
-                List<TOCReference> chapters = tocReferences.get(i).getChildren();
-                for (int j = 0; j < chapters.size(); j++) {
-                    text.append(chapters.get(j).getTitle()).append("\n");
-                    System.out.println(chapters.get(j).getChildren().get(0));
-                }
-            }
-            textView.setText(text);
-        } catch (IOException e) {
-            Log.e("epublib", e.getMessage());
-        }*/
+        new LoadBook().execute(path);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        MainWindow.closeLoadingDialog();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Initialize menu inflater
+        MenuInflater menuInflater = getMenuInflater();
+        //Inflate menu
+        menuInflater.inflate(R.menu.night_mode_menu, menu);
+        MenuItem changeModeItem = menu.findItem(R.id.night_mode);
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            changeModeItem.setIcon(R.drawable.light_mode_white_24dp);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.night_mode) {
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                return true;
+            }
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            return true;
+        }
+        //MainWindow.closeLoadingDialog();
         onBackPressed();
-        //this.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Recursively Log the Table of Contents
-     *
-     * @param tocReferences
-     * @param depth
-     */
-    private String logTableOfContents(List<TOCReference> tocReferences, int depth) {
-        if (tocReferences == null) {
+    class LoadBook extends AsyncTask<String, Void, String[]> {
+        //This method will run on UIThread and it will execute before doInBackground
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            loadingDialog = new LoadingDialog(BookEPUB.this);
+            loadingDialog.startLoadingDialog();
+        }
+
+        //This method will run on background thread and after completion it will return result to onPostExecute
+        @Override
+        protected String[] doInBackground(String... strings) {
+            try {
+                // find InputStream for book
+                InputStream epubInputStream = new FileInputStream(strings[0]);
+
+                // Load Book from inputStream
+                Book book = (new EpubReader()).readEpub(epubInputStream);
+                StringBuilder data = new StringBuilder();
+                List<Resource> bookChapters = book.getContents();
+                for (int i = 1; i < bookChapters.size(); i++) {
+                    data.append(new String(bookChapters.get(i).getData()));
+                }
+                return new String[] {strings[0], String.valueOf(data)};
+            } catch (IOException e) {
+                Log.e("epublib", e.getMessage());
+            }
             return null;
         }
-        StringBuilder result = new StringBuilder();
-        for (TOCReference tocReference : tocReferences) {
-            StringBuilder tocString = new StringBuilder();
-            for (int i = 0; i < depth; i++) {
-                tocString.append("\t");
-            }
-            tocString.append(tocReference.getTitle());
-            result.append(tocString).append("\n");
 
-            logTableOfContents(tocReference.getChildren(), depth + 1);
+        //This method runs on UIThread and it will execute when doINBackground is completed
+        @Override
+        protected void onPostExecute(String... s) {
+            super.onPostExecute(s);
+            webView.loadDataWithBaseURL(s[0], s[1], "text/html", "UTF-8", null);
+            webView.setVerticalScrollBarEnabled(true);
+            webView.setVerticalScrollBarEnabled(true);
+            loadingDialog.dismissDialog();
         }
-        return result.toString();
     }
 }

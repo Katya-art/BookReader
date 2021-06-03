@@ -23,9 +23,8 @@
             android:textColorHint="@color/teal_700"
             android:textSize="20sp"
             app:met_floatingLabel="highlight"
-            app:met_baseColor="#0056d3"
-            app:met_primaryColor="#982360"
-            app:met_errorColor="#ddaa00"
+            app:met_primaryColor="@color/pink"
+            app:met_errorColor="@color/yellow"
             app:met_singleLineEllipsis="true"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
@@ -39,7 +38,6 @@
             android:textColorHint="@color/teal_700"
             android:textSize="20sp"
             app:met_floatingLabel="highlight"
-            app:met_baseColor="#0056d3"
             app:met_primaryColor="#982360"
             app:met_errorColor="#ddaa00"
             app:met_singleLineEllipsis="true"/>
@@ -55,7 +53,6 @@
             android:textColorHint="@color/teal_700"
             android:textSize="20sp"
             app:met_floatingLabel="highlight"
-            app:met_baseColor="#0056d3"
             app:met_primaryColor="#982360"
             app:met_errorColor="#ddaa00"
             app:met_singleLineEllipsis="true"/>
@@ -71,7 +68,7 @@
             android:textColorHint="@color/teal_700"
             android:textSize="20sp"
             app:met_floatingLabel="highlight"
-            app:met_baseColor="#0056d3"
+
             app:met_primaryColor="#982360"
             app:met_errorColor="#ddaa00"
             app:met_singleLineEllipsis="true"/>
@@ -93,7 +90,8 @@
                 android:layout_marginRight="6dp"
                 android:textColor="@color/white"
                 android:background="@drawable/button_animation"
-                android:text="@string/cancel" />
+                android:text="@string/cancel"
+                android:layout_marginEnd="6dp" />
 
             <Button
                 android:id="@+id/btnRegister"
@@ -103,7 +101,8 @@
                 android:layout_marginLeft="6dp"
                 android:textColor="@color/white"
                 android:background="@drawable/button_animation"
-                android:text="@string/register" />
+                android:text="@string/register"
+                android:layout_marginStart="6dp" />
         </LinearLayout>
 
     </LinearLayout>

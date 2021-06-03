@@ -10,6 +10,9 @@
     <string name="phone">Номер телефону</string>
     <string name="sort">Назва(А-Я)</string>
     <string name="sort_reversed">Назва(Я-А)</string>
+    <string name="search">Пошук</string>
+    <string name="more">Більше</string>
+    <string name="night_mode">Нічний режим</string>
 
     <string name="app_name">Read from Asset</string>
     <!-- This is just a unique id. Typically based on pkg name -->

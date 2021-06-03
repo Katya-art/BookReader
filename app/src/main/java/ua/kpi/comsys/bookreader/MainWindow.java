@@ -15,6 +15,7 @@ import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.MenuItemCompat;
 
 import java.io.File;
@@ -83,6 +84,7 @@ public class MainWindow extends AppCompatActivity implements AdapterView.OnItemC
         intent.putExtra("name", book.getName());
         intent.putExtra("path", book.getPath());
         startActivity(intent);
+        loadingDialog.dismissDialog();
     }
 
     @Override
@@ -107,30 +109,10 @@ public class MainWindow extends AppCompatActivity implements AdapterView.OnItemC
                 return true;
             }
         });
-
-        /*MenuItem sortItem = menu.findItem(R.id.action_sort);
-        Button button = (Button) MenuItemCompat.getActionView(sortItem);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bookArrayAdapter.sort();
-            }
-        });*/
-        /*MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                bookArrayAdapter.getFilter().filter(newText);
-                return true;
-            }
-        });*/
+        MenuItem changeModeItem = menu.findItem(R.id.night_mode);
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            changeModeItem.setIcon(R.drawable.light_mode_white_24dp);
+        }
         return true;
     }
 
@@ -146,6 +128,14 @@ public class MainWindow extends AppCompatActivity implements AdapterView.OnItemC
         }
         if (id == R.id.action_sort_reversed) {
             bookArrayAdapter.sortReversed();
+            return true;
+        }
+        if (id == R.id.night_mode) {
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                return true;
+            }
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             return true;
         }
         return super.onOptionsItemSelected(item);
