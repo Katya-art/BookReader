@@ -14,10 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookReader">
         <activity android:name=".BookEPUB" />
-        <activity android:name=".BookFB2" />
+        <activity android:name=".BookFB2"
+            android:configChanges="uiMode" />
         <activity android:name=".BookPDF"
+            android:configChanges="uiMode" />
+        <activity android:name=".BookTXT"
             android:configChanges="uiMode"/>
-        <activity android:name=".BookTXT" />
         <activity android:name=".MainWindow" />
         <activity android:name=".RegisterWindow" />
         <activity android:name=".SignInWindow" />

@@ -14,29 +14,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tvText1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5pt"
-                android:layout_marginTop="3pt"
-                android:layout_marginRight="5pt"
-                android:layout_gravity="center_horizontal"
-                android:textSize="12pt">
-            </TextView>
-
-            <TextView
-                android:id="@+id/tvText2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5pt"
-                android:layout_marginTop="3pt"
-                android:layout_marginRight="5pt"
-                android:layout_gravity="center_horizontal"
-                android:textSize="12pt">
-            </TextView>
+            android:orientation="vertical"
+            android:id="@+id/layout">
 
         </LinearLayout>
 

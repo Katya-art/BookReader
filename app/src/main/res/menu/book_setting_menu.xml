@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/night_mode"
+        android:icon="@drawable/mode_night_white_24dp"
+        android:title="@string/night_mode"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/settings_white_24dp"
+        android:title="@string/settings"
+        app:showAsAction="ifRoom">
+
+        <menu>
+            <item
+                android:id="@+id/text_color"
+                android:icon="@drawable/palette_white_24dp"
+                android:title="@string/text_color"
+                app:showAsAction="ifRoom">
+                <menu>
+                    <item
+                        android:id="@+id/color_black"
+                        android:title="Black"/>
+
+                    <item
+                        android:id="@+id/color_grey"
+                        android:title="Grey"/>
+
+                    <item
+                        android:id="@+id/color_white"
+                        android:title="White"/>
+                </menu>
+            </item>
+
+            <item
+                android:id="@+id/font"
+                android:icon="@drawable/format_bold_white_24dp"
+                android:title="@string/text_font"
+                app:showAsAction="ifRoom">
+                <menu>
+                    <item
+                        android:id="@+id/font_default"
+                        android:title="Default"/>
+
+                    <item
+                        android:id="@+id/font_monospace"
+                        android:title="Monospace"/>
+
+                    <item
+                        android:id="@+id/font_serif"
+                        android:title="Serif"/>
+
+                </menu>
+            </item>
+
+            <item
+                android:id="@+id/size"
+                android:icon="@drawable/format_size_white_24dp"
+                android:title="@string/text_size"
+                app:showAsAction="ifRoom">
+                <menu>
+                    <item
+                        android:id="@+id/size_8"
+                        android:title="8" />
+
+                    <item
+                        android:id="@+id/size_12"
+                        android:title="12" />
+
+                    <item
+                        android:id="@+id/size_14"
+                        android:title="14" />
+
+                    <item
+                        android:id="@+id/size_20"
+                        android:title="20" />
+
+                    <item
+                        android:id="@+id/size_24"
+                        android:title="24" />
+
+                    <item
+                        android:id="@+id/size_32"
+                        android:title="32" />
+
+                    <item
+                        android:id="@+id/size_40"
+                        android:title="40" />
+
+                    <item
+                        android:id="@+id/size_64"
+                        android:title="64" />
+                </menu>
+            </item>
+        </menu>
+    </item>
+
+
+
+</menu>

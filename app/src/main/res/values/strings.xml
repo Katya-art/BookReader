@@ -13,6 +13,10 @@
     <string name="search">Пошук</string>
     <string name="more">Більше</string>
     <string name="night_mode">Нічний режим</string>
+    <string name="settings">Налаштування</string>
+    <string name="text_font">Шрифт</string>
+    <string name="text_color">Колір</string>
+    <string name="text_size">Розмір тексту</string>
 
     <string name="app_name">Read from Asset</string>
     <!-- This is just a unique id. Typically based on pkg name -->
