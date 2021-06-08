@@ -56,7 +56,7 @@ public class SignInWindow extends AppCompatActivity {
 
             auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                     .addOnSuccessListener(authResult -> {
-                        startActivity(new Intent(SignInWindow.this, MainWindow.class));
+                        startActivity(new Intent(SignInWindow.this, ListOfBooks.class));
                         finish();
                     }).addOnFailureListener(e -> email.setError("Помилка авторизації. Не вірно задана пошта чи пароль"));
         });

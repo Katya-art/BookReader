@@ -7,9 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SearchView;
 
@@ -20,10 +18,11 @@ import androidx.core.view.MenuItemCompat;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import ua.kpi.comsys.bookreader.models.Book;
 
-public class MainWindow extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ListOfBooks extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private BookArrayAdapter bookArrayAdapter;
     private ArrayList<Book> books;
@@ -32,13 +31,13 @@ public class MainWindow extends AppCompatActivity implements AdapterView.OnItemC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_window);
-        this.getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        loadingDialog = new LoadingDialog(MainWindow.this);
+        setContentView(R.layout.activity_list_of_books);
+        Objects.requireNonNull(this.getSupportActionBar()).setDisplayHomeAsUpEnabled(false);
+        loadingDialog = new LoadingDialog(ListOfBooks.this);
         ListView listView = findViewById(R.id.list);
         books = new ArrayList<>();
         Search_Dir(Environment.getExternalStorageDirectory());
-        bookArrayAdapter = new BookArrayAdapter(MainWindow.this, R.layout.book_info, books);
+        bookArrayAdapter = new BookArrayAdapter(ListOfBooks.this, R.layout.book_info, books);
         listView.setAdapter(bookArrayAdapter);
         listView.setOnItemClickListener(this);
     }
@@ -72,19 +71,13 @@ public class MainWindow extends AppCompatActivity implements AdapterView.OnItemC
         Book book = (Book) parent.getItemAtPosition(position);
         Intent intent = null;
         if (book.getName().endsWith(".pdf")) {
-            intent = new Intent(this, BookPDF.class);
-        } else if (book.getName().endsWith(".txt")) {
-            intent = new Intent(this, BookTXT.class);
-        } else if (book.getName().endsWith(".fb2")) {
-            intent = new Intent(this, BookFB2.class);
-        } else if (book.getName().endsWith(".epub")) {
-            intent = new Intent(this, BookEPUB.class);
+            intent = new Intent(this, BookPDFActivity.class);
+        } else {
+            intent = new Intent(this, BookActivity.class);
         }
-        assert intent != null;
         intent.putExtra("name", book.getName());
         intent.putExtra("path", book.getPath());
         startActivity(intent);
-        loadingDialog.dismissDialog();
     }
 
     @Override

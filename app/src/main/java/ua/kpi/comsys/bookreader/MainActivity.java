@@ -7,12 +7,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-import androidx.core.view.MenuItemCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;

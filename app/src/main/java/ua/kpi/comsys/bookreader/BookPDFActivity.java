@@ -19,7 +19,7 @@ import com.github.barteksc.pdfviewer.PDFView;
 import java.io.File;
 import java.util.Objects;
 
-public class BookPDF extends AppCompatActivity {
+public class BookPDFActivity extends AppCompatActivity {
 
     PDFView bookPDFView;
     ActionBar actionBar;

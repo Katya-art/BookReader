@@ -71,7 +71,7 @@ public class BookArrayAdapter extends ArrayAdapter implements Filterable {
 
         TextView bookName = view.findViewById(R.id.textView);
         bookName.setText(booksFiltered.get(position).getName());
-        BitmapWorkerTask task = new BitmapWorkerTask((ImageView) view.findViewById(R.id.imageView));
+        BitmapWorkerTask task = new BitmapWorkerTask(view.findViewById(R.id.imageView));
         task.execute(position);
         return view;
     }
