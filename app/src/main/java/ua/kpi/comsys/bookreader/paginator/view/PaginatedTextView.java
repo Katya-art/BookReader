@@ -1,10 +1,12 @@
 package ua.kpi.comsys.bookreader.paginator.view;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.Spannable;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Size;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
@@ -47,6 +49,8 @@ public class PaginatedTextView extends AppCompatTextView {
     private OnActionListener actionListener = null;
     private PaginationController controller;
     private boolean isMeasured = false;
+    private Typeface textPaintTypeface = Typeface.DEFAULT;
+    private float textPaintSize = 50;
 
     public boolean getMeasured() {
         return isMeasured;
@@ -54,6 +58,22 @@ public class PaginatedTextView extends AppCompatTextView {
 
     public void setMeasured(boolean measured) {
         isMeasured = measured;
+    }
+
+    public Typeface getTextPaintTypeface() {
+        return textPaintTypeface;
+    }
+
+    public void setTextPaintTypeface(Typeface textPaintTypeface) {
+        this.textPaintTypeface = textPaintTypeface;
+    }
+
+    public float getTextPaintSize() {
+        return textPaintSize;
+    }
+
+    public void setTextPaintSize(float textPaintSize) {
+        this.textPaintSize = textPaintSize;
     }
 
     @Override
@@ -111,6 +131,8 @@ public class PaginatedTextView extends AppCompatTextView {
     private void loadFirstPage(CharSequence text) {
         int effectWidth = getWidth() - (getPaddingLeft() + getPaddingRight());
         int effectHeight = getHeight() - (getPaddingTop() + getPaddingBottom());
+        textPaint.setTypeface(getTextPaintTypeface());
+        textPaint.setTextSize(getTextPaintSize());
         controller = new PaginationController(text, effectWidth, effectHeight, textPaint, getLineSpacingMultiplier(), getLineSpacingExtra());
         setPageState(controller.getCurrentPage());
     }

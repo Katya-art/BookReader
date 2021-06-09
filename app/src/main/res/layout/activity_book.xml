@@ -14,7 +14,6 @@
         android:layout_weight="1"
         android:padding="@dimen/margin_medium"
         android:textSize="18sp"
-        android:text="@string/text_size"
         android:textColorLink="@color/text_color"/>
 
     <include layout="@layout/view_info_panel" />

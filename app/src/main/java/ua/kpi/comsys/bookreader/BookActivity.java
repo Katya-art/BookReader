@@ -55,6 +55,7 @@ public class BookActivity extends AppCompatActivity implements OnSwipeListener, 
     private TextView tvReadPages;
     private PaginatedTextView tvBookContent;
     private ActionBar actionBar;
+    private CharSequence text;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
@@ -77,18 +78,24 @@ public class BookActivity extends AppCompatActivity implements OnSwipeListener, 
 
         if (name.endsWith(".txt")) {
             tvBookName.setText(name.replace(".txt", ""));
-            tvBookContent.setup(getTextTXT(path));
+            text = getTextTXT(path);
         }
 
         if (name.endsWith(".fb2")) {
             tvBookName.setText(name.replace(".fb2", ""));
-            tvBookContent.setup(getTextFB2(path));
-            System.out.println("Text colors: " + tvBookContent.getTextColors());
+            text = getTextFB2(path);
         }
 
         if (name.endsWith(".epub")) {
             tvBookName.setText(name.replace(".epub", ""));
-            tvBookContent.setup(getTextEpub(path));
+            text = getTextEpub(path);
+        }
+
+        tvBookContent.setup(text);
+
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
+            tvBookContent.setLinkTextColor(Color.parseColor("#FFFFFF"));
+            tvBookContent.setTextColor(Color.parseColor("#FFFFFF"));
         }
 
         tvBookContent.setOnActionListener(this);
@@ -230,7 +237,6 @@ public class BookActivity extends AppCompatActivity implements OnSwipeListener, 
             return true;
         }
 
-        //MainWindow.closeLoadingDialog();
         if (id == android.R.id.home) {
             ListOfBooks.closeLoadingDialog();
             onBackPressed();
@@ -256,21 +262,29 @@ public class BookActivity extends AppCompatActivity implements OnSwipeListener, 
         }
 
         if (id == R.id.font_default) {
+            tvBookContent.setTextPaintTypeface(Typeface.DEFAULT);
+            tvBookContent.setup(text);
             tvBookContent.setTypeface(Typeface.DEFAULT);
             return true;
         }
 
         if (id == R.id.font_monospace) {
+            tvBookContent.setTextPaintTypeface(Typeface.MONOSPACE);
+            tvBookContent.setup(text);
             tvBookContent.setTypeface(Typeface.MONOSPACE);
             return true;
         }
 
         if (id == R.id.font_serif) {
+            tvBookContent.setTextPaintTypeface(Typeface.SERIF);
+            tvBookContent.setup(text);
             tvBookContent.setTypeface(Typeface.SERIF);
         }
 
         if (id == R.id.size_8 || id == R.id.size_12 || id == R.id.size_14 || id == R.id.size_20 ||
                 id == R.id.size_24 || id == R.id.size_32 || id == R.id.size_40 || id == R.id.size_64) {
+            tvBookContent.setTextPaintSize((float) (Float.parseFloat(item.getTitle().toString()) * 2.75));
+            tvBookContent.setup(text);
             tvBookContent.setTextSize(Float.parseFloat(item.getTitle().toString()));
             return true;
         }
