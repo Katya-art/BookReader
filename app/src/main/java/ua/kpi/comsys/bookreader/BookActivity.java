@@ -92,6 +92,8 @@ public class BookActivity extends AppCompatActivity implements OnSwipeListener, 
         }
 
         tvBookContent.setup(text);
+        tvBookContent.setLinkTextColor(Color.parseColor("#2D170A"));
+        tvBookContent.setTextColor(Color.parseColor("#2D170A"));
 
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             tvBookContent.setLinkTextColor(Color.parseColor("#FFFFFF"));
@@ -221,10 +223,10 @@ public class BookActivity extends AppCompatActivity implements OnSwipeListener, 
         if (id == R.id.night_mode) {
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#6200EE")));
-                tvBookContent.setBackgroundColor(Color.parseColor("#FFFFFF"));
-                tvBookContent.setLinkTextColor(Color.parseColor("#757575"));
-                tvBookContent.setTextColor(Color.parseColor("#757575"));
+                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#6E382B")));
+                tvBookContent.setBackgroundColor(Color.parseColor("#F4E6D7"));
+                tvBookContent.setLinkTextColor(Color.parseColor("#2D170A"));
+                tvBookContent.setTextColor(Color.parseColor("#2D170A"));
                 item.setIcon(R.drawable.mode_night_white_24dp);
                 return true;
             }

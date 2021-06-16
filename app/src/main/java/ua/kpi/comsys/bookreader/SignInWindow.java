@@ -6,21 +6,27 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 
 public class SignInWindow extends AppCompatActivity {
     Button btnSignIn, btnCancel;
+    TextView textView;
 
     FirebaseAuth auth;
     FirebaseDatabase db;
@@ -33,6 +39,8 @@ public class SignInWindow extends AppCompatActivity {
 
         btnSignIn = findViewById(R.id.btnSignIn);
         btnCancel = findViewById(R.id.btnCancel1);
+
+        textView = findViewById(R.id.newUser);
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
@@ -58,7 +66,15 @@ public class SignInWindow extends AppCompatActivity {
                     .addOnSuccessListener(authResult -> {
                         startActivity(new Intent(SignInWindow.this, ListOfBooks.class));
                         finish();
-                    }).addOnFailureListener(e -> email.setError("Помилка авторизації. Не вірно задана пошта чи пароль"));
+                    }).addOnFailureListener(e -> {
+                        email.setError("Помилка авторизації. Не вірно задана пошта чи пароль");
+                        textView.setVisibility(View.VISIBLE);
+                    });
+        });
+
+        textView.setOnClickListener(v -> {
+            Intent intent = new Intent(SignInWindow.this, RegisterWindow.class);
+            startActivity(intent);
         });
     }
 

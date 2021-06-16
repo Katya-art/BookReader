@@ -8,8 +8,9 @@
     <string name="password">Пароль</string>
     <string name="name">Ім\'я</string>
     <string name="phone">Номер телефону</string>
-    <string name="sort">Назва(А-Я)</string>
-    <string name="sort_reversed">Назва(Я-А)</string>
+    <string name="sort">Сортувати за</string>
+    <string name="sort_by_name">Назвою(А-Я)</string>
+    <string name="sort_reversed">Назвою(Я-А)</string>
     <string name="search">Пошук</string>
     <string name="more">Більше</string>
     <string name="night_mode">Нічний режим</string>
@@ -17,6 +18,9 @@
     <string name="text_font">Шрифт</string>
     <string name="text_color">Колір</string>
     <string name="text_size">Розмір тексту</string>
+    <string name="filter">Фільтр</string>
+    <string name="show_all">Показати всі</string>
+    <string name="new_user">Створити новий акаунт</string>
 
     <string name="app_name">Read from Asset</string>
     <!-- This is just a unique id. Typically based on pkg name -->

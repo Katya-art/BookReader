@@ -10,25 +10,61 @@
         app:actionViewClass="android.widget.SearchView"/>
 
     <item
-        android:id="@+id/sort"
-        android:title="@string/sort"
-        app:showAsAction="ifRoom"
-        android:icon="@android:drawable/ic_menu_sort_by_size">
-        <menu>
-            <item
-                android:id="@+id/action_sort"
-                android:title="@string/sort"/>
-
-            <item
-                android:id="@+id/action_sort_reversed"
-                android:title="@string/sort_reversed"/>
-        </menu>
-    </item>
-
-    <item
         android:id="@+id/night_mode"
         android:title="@string/night_mode"
         app:showAsAction="always"
         android:icon="@drawable/mode_night_white_24dp"/>
+
+    <item
+        android:id="@+id/settings"
+        android:title="@string/settings"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/more_vert_white_24dp">
+        <menu>
+            <item
+                android:id="@+id/sort"
+                android:title="@string/sort"
+                app:showAsAction="ifRoom"
+                android:icon="@android:drawable/ic_menu_sort_alphabetically">
+                <menu>
+                    <item
+                        android:id="@+id/action_sort"
+                        android:title="@string/sort_by_name"/>
+
+                    <item
+                        android:id="@+id/action_sort_reversed"
+                        android:title="@string/sort_reversed"/>
+                </menu>
+            </item>
+
+            <item
+                android:id="@+id/filter"
+                android:title="@string/filter"
+                app:showAsAction="ifRoom"
+                android:icon="@drawable/filter_alt_white_24dp">
+                <menu>
+                    <item
+                        android:id="@+id/showAll"
+                        android:title="@string/show_all"/>
+
+                    <item
+                        android:id="@+id/filter_pdf"
+                        android:title="pdf"/>
+
+                    <item
+                        android:id="@+id/filter_fb2"
+                        android:title="fb2"/>
+                    <item
+                        android:id="@+id/filter_txt"
+                        android:title="txt"/>
+
+                    <item
+                        android:id="@+id/filter_epub"
+                        android:title="epub"/>
+                </menu>
+            </item>
+
+        </menu>
+    </item>
 
 </menu>

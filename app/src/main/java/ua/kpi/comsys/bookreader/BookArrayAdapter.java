@@ -134,6 +134,22 @@ public class BookArrayAdapter extends ArrayAdapter implements Filterable {
         }
     };
 
+    public void filterByType(String type) {
+        booksFiltered.clear();
+        for (Book book : books) {
+            if (book.getName().endsWith(type)) {
+                booksFiltered.add(book);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    public void showAll() {
+        booksFiltered.clear();
+        booksFiltered = new ArrayList<>(books);
+        notifyDataSetChanged();
+    }
+
     public void sort() {
         Collections.sort(booksFiltered, new Book());
         notifyDataSetChanged();

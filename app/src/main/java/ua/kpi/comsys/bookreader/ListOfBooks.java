@@ -131,6 +131,14 @@ public class ListOfBooks extends AppCompatActivity implements AdapterView.OnItem
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             return true;
         }
+        if (id == R.id.filter_pdf || id == R.id.filter_epub || id == R.id.filter_fb2 || id == R.id.filter_txt) {
+            bookArrayAdapter.filterByType((String) item.getTitle());
+            return true;
+        }
+        if (id == R.id.showAll) {
+            bookArrayAdapter.showAll();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 

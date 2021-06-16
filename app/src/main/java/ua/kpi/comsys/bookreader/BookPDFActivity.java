@@ -61,7 +61,7 @@ public class BookPDFActivity extends AppCompatActivity {
         if (id == R.id.night_mode) {
             if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#6200EE")));
+                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#6E382B")));
                 bookPDFView.setNightMode(false);
                 bookPDFView.requestLayout();
                 item.setIcon(R.drawable.mode_night_white_24dp);
@@ -75,7 +75,7 @@ public class BookPDFActivity extends AppCompatActivity {
             bookPDFView.requestLayout();
             return true;
         }
-        //MainWindow.closeLoadingDialog();
+        ListOfBooks.closeLoadingDialog();
         onBackPressed();
         return super.onOptionsItemSelected(item);
     }
