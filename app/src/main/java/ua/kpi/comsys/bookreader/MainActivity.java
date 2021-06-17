@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         db = FirebaseDatabase.getInstance();
         users = db.getReference("Users");
 
-        btnRegistration.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, RegisterWindow.class)));
-        btnSignIn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SignInWindow.class)));
+        btnRegistration.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, RegisterActivity.class)));
+        btnSignIn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SignInActivity.class)));
     }
 
     @Override

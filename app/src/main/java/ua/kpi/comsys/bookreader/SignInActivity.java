@@ -14,17 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
 
-public class SignInWindow extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
     Button btnSignIn, btnCancel;
     TextView textView;
 
@@ -35,7 +32,7 @@ public class SignInWindow extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sign_in_window);
+        setContentView(R.layout.activity_sign_in);
 
         btnSignIn = findViewById(R.id.btnSignIn);
         btnCancel = findViewById(R.id.btnCancel1);
@@ -64,7 +61,7 @@ public class SignInWindow extends AppCompatActivity {
 
             auth.signInWithEmailAndPassword(email.getText().toString(), password.getText().toString())
                     .addOnSuccessListener(authResult -> {
-                        startActivity(new Intent(SignInWindow.this, ListOfBooks.class));
+                        startActivity(new Intent(SignInActivity.this, ListOfBooks.class));
                         finish();
                     }).addOnFailureListener(e -> {
                         email.setError("Помилка авторизації. Не вірно задана пошта чи пароль");
@@ -73,7 +70,7 @@ public class SignInWindow extends AppCompatActivity {
         });
 
         textView.setOnClickListener(v -> {
-            Intent intent = new Intent(SignInWindow.this, RegisterWindow.class);
+            Intent intent = new Intent(SignInActivity.this, RegisterActivity.class);
             startActivity(intent);
         });
     }

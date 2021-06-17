@@ -14,12 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BookReader">
         <activity android:name=".BookPDFActivity"
-            android:configChanges="uiMode" />
+            android:configChanges="uiMode|keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" />
         <activity android:name=".BookActivity"
             android:configChanges="uiMode"/>
-        <activity android:name=".ListOfBooks" />
-        <activity android:name=".RegisterWindow" />
-        <activity android:name=".SignInWindow" />
+        <activity android:name=".ListOfBooks"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize"/>
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".SignInActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

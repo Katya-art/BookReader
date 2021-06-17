@@ -49,8 +49,7 @@ import ua.kpi.comsys.bookreader.paginator.view.PaginatedTextView;
 
 public class BookActivity extends AppCompatActivity implements OnSwipeListener, OnActionListener {
 
-    private String tag = "BookTXT";
-    private TextView tvBookName;
+    private final String tag = "BookTXT";
     private TextView tvReadPercent;
     private TextView tvReadPages;
     private PaginatedTextView tvBookContent;
@@ -70,7 +69,7 @@ public class BookActivity extends AppCompatActivity implements OnSwipeListener, 
         String path = arguments.get("path").toString();
         String name = arguments.get("name").toString();
 
-        tvBookName = findViewById(R.id.tv_book_name);
+        TextView tvBookName = findViewById(R.id.tv_book_name);
         tvReadPercent = findViewById(R.id.tv_percent_read);
         tvReadPages = findViewById(R.id.tv_pages_read);
 

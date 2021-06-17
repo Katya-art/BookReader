@@ -35,10 +35,10 @@ import ua.kpi.comsys.bookreader.models.Book;
 
 public class BookArrayAdapter extends ArrayAdapter implements Filterable {
 
-    private List<Book> books;
+    private final List<Book> books;
     private List<Book> booksFiltered;
-    private int resource;
-    private Context context;
+    private final int resource;
+    private final Context context;
 
     public BookArrayAdapter(Context context, int resource, List<Book> books) {
         super(context, resource, books);

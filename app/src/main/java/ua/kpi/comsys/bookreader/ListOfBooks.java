@@ -69,7 +69,7 @@ public class ListOfBooks extends AppCompatActivity implements AdapterView.OnItem
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         loadingDialog.startLoadingDialog();
         Book book = (Book) parent.getItemAtPosition(position);
-        Intent intent = null;
+        Intent intent;
         if (book.getName().endsWith(".pdf")) {
             intent = new Intent(this, BookPDFActivity.class);
         } else {

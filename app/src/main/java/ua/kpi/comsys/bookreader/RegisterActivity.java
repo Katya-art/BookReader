@@ -1,5 +1,6 @@
 package ua.kpi.comsys.bookreader;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -21,7 +24,7 @@ import java.util.Objects;
 
 import ua.kpi.comsys.bookreader.models.User;
 
-public class RegisterWindow extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     Button btnRegister, btnCancel;
 
     FirebaseAuth auth;
@@ -31,7 +34,7 @@ public class RegisterWindow extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.register_window);
+        setContentView(R.layout.activity_register);
 
         btnRegister = findViewById(R.id.btnRegister);
         btnCancel = findViewById(R.id.btnCancel);
@@ -110,14 +113,20 @@ public class RegisterWindow extends AppCompatActivity {
                         users.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid())
                                 .setValue(user)
                                 .addOnSuccessListener(unused -> {
-                                    finish();
+                                    auth.signInWithEmailAndPassword(user.getEmail(), user.getPassword())
+                                            .addOnSuccessListener(authResult1 -> {
+                                                startActivity(new Intent(RegisterActivity.this, ListOfBooks.class));
+                                                finish();
+                                            });
+                                    //finish();
                                     //Snackbar.make(root, "Користувач був успішно доданий", Snackbar.LENGTH_SHORT).show();
-                                    Log.i("Add ", "user");
+                                    //Log.i("Add ", "user");
                                 });
                     }).addOnFailureListener(e -> {
-                        finish();
+                        email.setError("Помилка реєстрації. Вже існує користувач з заданою поштовою адресою");
+                        //finish();
                         //Snackbar.make(root, "Помилка реєстрації. Вже існує користувач з заданою електронною поштою", Snackbar.LENGTH_SHORT).show();
-                        Log.i("Error", e.getMessage());
+                        //Log.i("Error", e.getMessage());
                     });
         });
     }
