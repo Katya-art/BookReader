@@ -1,6 +1,5 @@
 package ua.kpi.comsys.bookreader.paginator.pagination;
 
-import android.graphics.Typeface;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;

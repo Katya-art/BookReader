@@ -118,15 +118,10 @@ public class RegisterActivity extends AppCompatActivity {
                                                 startActivity(new Intent(RegisterActivity.this, ListOfBooks.class));
                                                 finish();
                                             });
-                                    //finish();
-                                    //Snackbar.make(root, "Користувач був успішно доданий", Snackbar.LENGTH_SHORT).show();
-                                    //Log.i("Add ", "user");
+
                                 });
                     }).addOnFailureListener(e -> {
                         email.setError("Помилка реєстрації. Вже існує користувач з заданою поштовою адресою");
-                        //finish();
-                        //Snackbar.make(root, "Помилка реєстрації. Вже існує користувач з заданою електронною поштою", Snackbar.LENGTH_SHORT).show();
-                        //Log.i("Error", e.getMessage());
                     });
         });
     }

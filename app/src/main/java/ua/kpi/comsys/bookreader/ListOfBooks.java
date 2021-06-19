@@ -36,7 +36,7 @@ public class ListOfBooks extends AppCompatActivity implements AdapterView.OnItem
         loadingDialog = new LoadingDialog(ListOfBooks.this);
         ListView listView = findViewById(R.id.list);
         books = new ArrayList<>();
-        Search_Dir(Environment.getExternalStorageDirectory());
+        Search_Dir(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS));
         bookArrayAdapter = new BookArrayAdapter(ListOfBooks.this, R.layout.book_info, books);
         listView.setAdapter(bookArrayAdapter);
         listView.setOnItemClickListener(this);

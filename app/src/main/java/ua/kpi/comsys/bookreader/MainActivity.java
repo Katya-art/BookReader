@@ -12,16 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
 public class MainActivity extends AppCompatActivity {
 
     Button btnSignIn, btnRegistration;
-    FirebaseAuth auth;
-    FirebaseDatabase db;
-    DatabaseReference users;
 
     RelativeLayout root;
 
@@ -34,10 +27,6 @@ public class MainActivity extends AppCompatActivity {
         btnRegistration = findViewById(R.id.btnRegistration);
 
         root = findViewById(R.id.root_element);
-
-        auth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance();
-        users = db.getReference("Users");
 
         btnRegistration.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, RegisterActivity.class)));
         btnSignIn.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SignInActivity.class)));
